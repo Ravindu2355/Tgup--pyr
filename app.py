@@ -13,7 +13,7 @@ def hello_world():
     return 'Hello from Koyeb'
 
 @app.route('/upload')
-def up_f():
+async def up_f():
     required_params = ['url', 'opw']
     missing_params = [param for param in required_params if not request.args.get(param)]
     if missing_params:
