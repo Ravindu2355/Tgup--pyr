@@ -43,7 +43,8 @@ async def upload_from_url(client: Client, message: Message):
         response = requests.get(url, stream=True)
         total_size = int(response.headers.get('content-length', 0))  # Get the total file size
         filename = url.split("/")[-1]  # Extract the filename from the URL
-        
+        if '?' in filename:
+            filename = filename.split("?")[0]
         downloaded_size = 0  # Track the downloaded size
         with open(filename, 'wb') as file:
             for chunk in response.iter_content(chunk_size=1024):
