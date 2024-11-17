@@ -20,8 +20,8 @@ def up_f():
     missing_params = [param for param in required_params if not request.args.get(param)]
     if missing_params:
         return jsonify({
-            'error': 'Some required parameters are missing or empty',
-            'missing_parameters': missing_params
+            's':0,
+            'error': 'Some required parameters are missing or empty'
         }), 400
     url = request.args.get('url')
     cid = request.args.get('cid')
