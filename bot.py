@@ -2,7 +2,7 @@ import os
 from pyrogram import Client, filters
 from pyrogram.types import Message
 from moviepy.editor import VideoFileClip
-from display_progress import vv
+from display_progress import progress_for_pyrogram, humanbytes, TimeFormatter
 import requests
 import math
 
