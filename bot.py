@@ -18,7 +18,7 @@ if not all([API_ID, API_HASH, BOT_TOKEN]):
     raise ValueError("API_ID, API_HASH, and BOT_TOKEN environment variables must be set.")
 
 # Create the Pyrogram client
-app = Client("bot_session", api_id=API_ID, api_hash=API_HASH, bot_token=BOT_TOKEN)
+bot = Client("bot_session", api_id=API_ID, api_hash=API_HASH, bot_token=BOT_TOKEN)
 
 # Function to format progress as a progress bar
 def progress_bar(completed, total, length=20):
@@ -27,7 +27,7 @@ def progress_bar(completed, total, length=20):
 
 # Function to generate a thumbnail from a video using ffmpeg
 
-@app.on_message(filters.command("upload") & filters.private)
+@bot.on_message(filters.command("upload") & filters.private)
 async def upload_from_url(client: Client, message: Message):
     try:
         # Check if the command contains a URL argument
@@ -99,4 +99,4 @@ async def upload_from_url(client: Client, message: Message):
 
 # Start the bot and keep it running
 print("Bot is running...")
-app.run()
+bot.run()
