@@ -58,7 +58,7 @@ def up_ul(url):
             'msg': 'done!',
             'fid': s_vid.video.file_id
         }), 200
-    except Exception as e:
+  except Exception as e:
         print(f"Err while dl:{e}")
         return jsonify({
             's':0,
