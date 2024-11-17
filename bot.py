@@ -5,6 +5,7 @@ from moviepy.editor import VideoFileClip
 from display_progress import progress_for_pyrogram, humanbytes, TimeFormatter
 import requests
 import math
+from PIL import Image
 
 
 # Load environment variables for API credentials
