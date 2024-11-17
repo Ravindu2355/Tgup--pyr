@@ -53,11 +53,11 @@ async def upload_from_url(client: Client, message: Message):
                     if total_size > 0 and downloaded_size % (total_size // 50) == 0:
                         #make a progress bar...
                         progress_i = int(20 * downloaded_size / total_size)
-                        progress=pro'[' + '✅️' * progress_i + '❌️' * (20 - progress_i) + ']'
+                        progress='[' + '✅️' * progress_i + '❌️' * (20 - progress_i) + ']'
                         #progress = progress_bar(downloaded_size, total_size)
                         percent = (downloaded_size / total_size) * 100
                         await reply_msg.edit_text(f"Downloading: {progress} {percent:.2f}%")
-
+                        print(percent)
         await reply_msg.edit_text("Download complete. Generating thumbnail...")
 
         # Generate a thumbnail for the video
