@@ -76,7 +76,7 @@ async def upload_from_url(client: Client, message: Message):
             video=filename,
             caption=f'Uploaded: {filename}',
             thumb=thumb_path,
-            supports_streaming=True  # Ensure the video is streamable
+            supports_streaming=True,  # Ensure the video is streamable
             progress=progress_for_pyrogram,
             progress_args=(
                 "uploading!",
