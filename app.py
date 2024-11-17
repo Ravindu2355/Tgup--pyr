@@ -1,6 +1,6 @@
 from flask import Flask
 import os, time
-from bot import Bot
+from bot import bot
 from moviepy.editor import VideoFileClip
 from display_progress import progress_for_pyrogram, humanbytes, TimeFormatter
 import requests
