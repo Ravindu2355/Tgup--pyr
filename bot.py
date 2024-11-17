@@ -1,4 +1,4 @@
-import os
+import os, time
 from pyrogram import Client, filters
 from pyrogram.types import Message
 from moviepy.editor import VideoFileClip
@@ -49,10 +49,12 @@ async def upload_from_url(client: Client, message: Message):
                 if chunk:
                     file.write(chunk)
                     downloaded_size += len(chunk)
-                    
                     # Update progress approximately every 2%
                     if total_size > 0 and downloaded_size % (total_size // 50) == 0:
-                        progress = progress_bar(downloaded_size, total_size)
+                        #make a progress bar...
+                        progress_i = int(20 * downloaded_size / total_size)
+                        progress=pro'[' + '✅️' * progress_i + '❌️' * (20 - progress_i) + ']'
+                        #progress = progress_bar(downloaded_size, total_size)
                         percent = (downloaded_size / total_size) * 100
                         await reply_msg.edit_text(f"Downloading: {progress} {percent:.2f}%")
 
@@ -73,7 +75,7 @@ async def upload_from_url(client: Client, message: Message):
             chat_id=message.chat.id,
             video=filename,
             caption=f'Uploaded: {filename}',
-            thumb=thumbnail_path,
+            thumb=thumb_path,
             supports_streaming=True  # Ensure the video is streamable
             progress=progress_for_pyrogram,
             progress_args=(
@@ -85,8 +87,8 @@ async def upload_from_url(client: Client, message: Message):
         
         # Clean up the local files after uploading
         os.remove(filename)
-        if thumbnail_path and os.path.exists(thumbnail_path):
-            os.remove(thumbnail_path)
+        if thumb_path and os.path.exists(thumb_path):
+            os.remove(thumb_path)
 
         await reply_msg.edit_text("Upload complete!")
 
