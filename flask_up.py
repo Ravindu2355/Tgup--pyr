@@ -1,3 +1,4 @@
+from flask import jsonify
 import os, time
 from bot import bot
 from moviepy.editor import VideoFileClip
