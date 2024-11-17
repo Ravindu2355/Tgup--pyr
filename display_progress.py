@@ -10,7 +10,7 @@ logger = logging.getLogger(__name__)
 
 import math, os, time, shutil
 
-
+from display_progress import progress_for_pyrogram, humanbytes, TimeFormatter
 #from config import Config
 # the Strings used for this "thing"
 #from translation import Translation
