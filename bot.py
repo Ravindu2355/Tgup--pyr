@@ -13,6 +13,8 @@ API_ID = os.getenv('apiid')
 API_HASH = os.getenv('apihash')
 BOT_TOKEN = os.getenv('tk')
 
+
+
 progress_s="free"
 #progress_dict="resting!"
 
@@ -31,7 +33,6 @@ def progress_bar(completed, total, length=20):
     return '[' + '=' * progress + ' ' * (length - progress) + ']'
 
 # Function to generate a thumbnail from a video using ffmpeg
-
 @bot.on_message(filters.private & ~filters.via_bot & filters.regex(pattern=".*http.*"))
 async def upload_from_url(client: Client, message: Message):
     try:
@@ -99,6 +100,7 @@ async def upload_from_url(client: Client, message: Message):
     except Exception as e:
         # Handle any errors and notify the user
         await message.reply(f"An error occurred: {str(e)}")
+
 
 # Start the bot and keep it running
 print("Bot is running...")
