@@ -18,7 +18,8 @@ if not all([API_ID, API_HASH, BOT_TOKEN]):
     raise ValueError("API_ID, API_HASH, and BOT_TOKEN environment variables must be set.")
 
 # Create the Pyrogram client
-bot = Client("bot_session", api_id=API_ID, api_hash=API_HASH, bot_token=BOT_TOKEN)
+plugins = dict(root="plugins")
+bot = Client("bot_session", api_id=API_ID, api_hash=API_HASH, bot_token=BOT_TOKEN,plugins=plugins)
 
 # Function to format progress as a progress bar
 def progress_bar(completed, total, length=20):
