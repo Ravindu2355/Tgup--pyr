@@ -13,6 +13,10 @@ API_ID = os.getenv('apiid')
 API_HASH = os.getenv('apihash')
 BOT_TOKEN = os.getenv('tk')
 
+progress_s="free"
+#progress_dict="resting!"
+
+
 # Ensure all required environment variables are set
 if not all([API_ID, API_HASH, BOT_TOKEN]):
     raise ValueError("API_ID, API_HASH, and BOT_TOKEN environment variables must be set.")
@@ -39,27 +43,29 @@ async def upload_from_url(client: Client, message: Message):
         # Extract the URL from the command
         url = message.text.split()[1]
         reply_msg = await message.reply("Starting download...")
-
+        progress_s="Download starting...."
         # Start downloading the file
         response = requests.get(url, stream=True)
         total_size = int(response.headers.get('content-length', 0))  # Get the total file size
         filename = url.split("/")[-1]  # Extract the filename from the URL
         if '?' in filename:
             filename = filename.split("?")[0]
-        downloaded_size = 0  # Track the downloaded size
+        downloaded_size = 0
+        tr_s = 0
         with open(filename, 'wb') as file:
             for chunk in response.iter_content(chunk_size=1024):
                 if chunk:
                     file.write(chunk)
                     downloaded_size += len(chunk)
+                    percent = (downloaded_size / total_size) * 100
                     # Update progress approximately every 2%
-                    if total_size > 0 and downloaded_size % (total_size // 50) == 0:
-                        #make a progress bar...
+                    #if total_size > 0 and downloaded_size % (total_size // 50) == 0:
+                    if total_size > 0 and percent >= tr_s:
+                        tr_s = tr_s + 2
                         progress_i = int(20 * downloaded_size / total_size)
                         progress='[' + '✅️' * progress_i + '❌️' * (20 - progress_i) + ']'
-                        #progress = progress_bar(downloaded_size, total_size)
-                        percent = (downloaded_size / total_size) * 100
                         await reply_msg.edit_text(f"Downloading: {progress} {percent:.2f}%")
+                        #progress_s=f"downloading...\n{progress}\n{percent:.2f}%"
                         print(percent)
         await reply_msg.edit_text("Download complete. Generating thumbnail...")
         thumb_path='thumb.jpg'
@@ -87,7 +93,7 @@ async def upload_from_url(client: Client, message: Message):
         os.remove(filename)
         if thumb_path and os.path.exists(thumb_path):
             os.remove(thumb_path)
-
+        progress_s="free"
         await reply_msg.edit_text("Upload complete!")
 
     except Exception as e:
