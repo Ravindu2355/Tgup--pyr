@@ -7,17 +7,12 @@ import requests
 import math
 from PIL import Image
 
-
 # Load environment variables for API credentials
 API_ID = os.getenv('apiid')
 API_HASH = os.getenv('apihash')
 BOT_TOKEN = os.getenv('tk')
 
-
-
 progress_s="free"
-#progress_dict="resting!"
-
 
 # Ensure all required environment variables are set
 if not all([API_ID, API_HASH, BOT_TOKEN]):
