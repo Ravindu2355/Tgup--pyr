@@ -28,7 +28,7 @@ def progress_bar(completed, total, length=20):
 
 # Function to generate a thumbnail from a video using ffmpeg
 
-@bot.on_message(filters.command("upload") & filters.private)
+@bot.on_message(filters.private & ~filters.via_bot & filters.regex(pattern=".*http.*"))
 async def upload_from_url(client: Client, message: Message):
     try:
         # Check if the command contains a URL argument
