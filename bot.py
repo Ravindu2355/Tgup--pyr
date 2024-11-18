@@ -62,11 +62,6 @@ async def upload_from_url(client: Client, message: Message):
                         await reply_msg.edit_text(f"Downloading: {progress} {percent:.2f}%")
                         print(percent)
         await reply_msg.edit_text("Download complete. Generating thumbnail...")
-
-        # Generate a thumbnail for the video
-        #await reply_msg.edit_text("Thumbnail generated. Uploading to Telegram...")
-
-        # Send the file with the thumbnail and streamable option
         thumb_path='thumb.jpg'
         with VideoFileClip(filename) as video:
               frame = video.get_frame(3.0)
